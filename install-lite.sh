@@ -32,7 +32,7 @@ else
     echo "  npm install -g openclaw@latest"
     echo ""
     echo "或使用完整安装脚本："
-    echo "  bash <(curl -fsSL https://raw.githubusercontent.com/wanikua/boluobobo-ai-court-tutorial/main/install.sh)"
+    echo "  bash <(curl -fsSL https://raw.githubusercontent.com/ayrnb/mage-agent/main/install.sh)"
     exit 1
 fi
 
@@ -393,5 +393,5 @@ echo "  3. 启动 Gateway："
 echo "     $CLI_CMD gateway --verbose"
 echo ""
 fi
-echo -e "完整教程：${BLUE}https://github.com/wanikua/boluobobo-ai-court-tutorial${NC}"
+echo -e "完整教程：${BLUE}https://github.com/ayrnb/mage-agent${NC}"
 echo ""
