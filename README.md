@@ -293,7 +293,7 @@
 #### Linux 一键安装
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/wanikua/boluobobo-ai-court-tutorial/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/ayrnb/mage-agent/main/install.sh)
 ```
 
 脚本自动完成：
@@ -308,13 +308,13 @@ bash <(curl -fsSL https://raw.githubusercontent.com/wanikua/boluobobo-ai-court-t
 
 > 💡 **已经装好 OpenClaw/Clawdbot？** 用精简版脚本，跳过系统依赖安装，只初始化工作区和配置模板：
 > ```bash
-> bash <(curl -fsSL https://raw.githubusercontent.com/wanikua/boluobobo-ai-court-tutorial/main/install-lite.sh)
+> bash <(curl -fsSL https://raw.githubusercontent.com/ayrnb/mage-agent/main/install-lite.sh)
 > ```
 > 支持两种模式：Discord 多Bot模式 或 纯 WebUI 模式（不需要Discord）。
 
 > 🍎 **macOS 用户？** 用 Mac 专用脚本，自动通过 Homebrew 安装所有依赖：
 > ```bash
-> bash <(curl -fsSL https://raw.githubusercontent.com/wanikua/boluobobo-ai-court-tutorial/main/install-mac.sh)
+> bash <(curl -fsSL https://raw.githubusercontent.com/ayrnb/mage-agent/main/install-mac.sh)
 > ```
 > 支持 Intel 和 Apple Silicon (M1/M2/M3/M4)，自动检测架构。
 
@@ -533,9 +533,9 @@ Agent 可以运行在 Docker 沙箱中，代码执行互不干扰。支持配置
 
 **启动方式：**
 ```bash
-# 1. 先 clone 教程仓库（如果还没有）
-git clone https://github.com/wanikua/boluobobo-ai-court-tutorial.git
-cd boluobobo-ai-court-tutorial
+# 1. 先 clone 仓库（如果还没有）
+git clone https://github.com/ayrnb/mage-agent.git
+cd mage-agent
 
 # 2. 构建前端
 cd gui && npm install && npm run build
@@ -720,7 +720,7 @@ curl -s "https://api.notion.com/v1/users/me" \
 遇到问题？跑一行命令自动检查配置：
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/wanikua/boluobobo-ai-court-tutorial/main/doctor.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/ayrnb/mage-agent/main/doctor.sh)
 ```
 
 诊断内容包括：
