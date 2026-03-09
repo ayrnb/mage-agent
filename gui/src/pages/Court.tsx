@@ -9,27 +9,25 @@ interface Bot {
 }
 
 const COLORS: Record<string, { bg: string; hat: string }> = {
-  main:       { bg: '#d4a574', hat: '#b8894d' },
-  neige:      { bg: '#ef4444', hat: '#b91c1c' },
-  duchayuan:  { bg: '#22c55e', hat: '#15803d' },
-  gongbu:     { bg: '#3b82f6', hat: '#1d4ed8' },
-  hubu:       { bg: '#eab308', hat: '#a16207' },
-  bingbu:     { bg: '#ef4444', hat: '#991b1b' },
-  libu2:      { bg: '#ec4899', hat: '#be185d' },
-  xingbu:     { bg: '#8b5cf6', hat: '#6d28d9' },
-  libu:       { bg: '#06b6d4', hat: '#0e7490' },
-  neiwufu:    { bg: '#f97316', hat: '#c2410c' },
-  hanlinyuan: { bg: '#14b8a6', hat: '#0f766e' },
-  taiyiyuan:  { bg: '#f472b6', hat: '#db2777' },
-  guozijian:  { bg: '#a78bfa', hat: '#7c3aed' },
-  yushanfang: { bg: '#fbbf24', hat: '#b45309' },
+  // === Three Branches Architecture ===
+  main:           { bg: '#d4a574', hat: '#b8894d' },  // Chief of Staff / 幕僚长
+  chiefofstaff:   { bg: '#d4a574', hat: '#b8894d' },  // Chief of Staff / 幕僚长
+  senate:         { bg: '#ef4444', hat: '#b91c1c' },  // Senate / 参议院
+  house:          { bg: '#ec4899', hat: '#be185d' },  // House / 众议院
+  defense:        { bg: '#3b82f6', hat: '#1d4ed8' },  // Defense / 国防部
+  treasury:       { bg: '#eab308', hat: '#a16207' },  // Treasury / 财政部
+  state:          { bg: '#06b6d4', hat: '#0e7490' },  // State Dept / 国务院
+  ustr:           { bg: '#f59e0b', hat: '#d97706' },  // Trade Rep / 贸易代表
+  press:          { bg: '#f97316', hat: '#c2410c' },  // Press Secretary / 新闻秘书
+  scotus:         { bg: '#8b5cf6', hat: '#6d28d9' },  // Supreme Court / 最高法院
+  circuit:        { bg: '#22c55e', hat: '#15803d' },  // Circuit Court / 巡回法院
 }
 
 function PixelPerson({ bot, selected, online, onClick, rank }: {
-  bot: Bot; selected: boolean; online: boolean; onClick: () => void; rank?: 'emperor' | 'minister' | 'official'
+  bot: Bot; selected: boolean; online: boolean; onClick: () => void; rank?: 'president' | 'secretary' | 'staff'
 }) {
   const c = COLORS[bot.id] || { bg: '#888', hat: '#666' }
-  const size = rank === 'emperor' ? 'scale-125' : rank === 'minister' ? 'scale-110' : ''
+  const size = rank === 'president' ? 'scale-125' : rank === 'secretary' ? 'scale-110' : ''
   
   return (
     <button
@@ -158,13 +156,13 @@ export default function Court() {
     setTimeout(() => logRef.current?.scrollTo(0, logRef.current.scrollHeight), 100)
   }
 
-  const core = bots.filter(b => ['main', 'neige', 'duchayuan'].includes(b.id))
-  const liubu = bots.filter(b => ['gongbu', 'hubu', 'bingbu', 'libu2', 'xingbu', 'libu'].includes(b.id))
-  const others = bots.filter(b => !['main', 'neige', 'duchayuan', 'gongbu', 'hubu', 'bingbu', 'libu2', 'xingbu', 'libu'].includes(b.id))
+  const core = bots.filter(b => ['main', 'chiefofstaff'].includes(b.id))
+  const departments = bots.filter(b => ['senate', 'house', 'defense', 'treasury', 'state', 'ustr', 'press', 'scotus', 'circuit'].includes(b.id))
+  const others = bots.filter(b => !core.includes(b) && !departments.includes(b))
 
   return (
     <div className="space-y-4">
-      {/* 朝堂 */}
+      {/* 简报室 */}
       <div className="rounded-lg overflow-hidden shadow-2xl">
         {/* 匾额 */}
         <div className="relative">
@@ -175,13 +173,13 @@ export default function Court() {
             
             <div className="text-[#ffd700] text-xl sm:text-2xl font-bold tracking-[0.5em]"
                  style={{ textShadow: '0 0 20px rgba(255,215,0,0.3), 2px 2px 4px rgba(0,0,0,0.5)', fontFamily: 'serif' }}>
-              菠萝朝堂
+              白宫简报室
             </div>
-            <div className="text-[#ffd700]/40 text-xs mt-1 tracking-[0.3em]">PINEAPPLE IMPERIAL COURT</div>
+            <div className="text-[#ffd700]/40 text-xs mt-1 tracking-[0.3em]">WHITE HOUSE BRIEFING ROOM</div>
           </div>
         </div>
 
-        {/* 朝堂内部 */}
+        {/* 简报室内部 */}
         <div className="relative" style={{ 
           background: `linear-gradient(180deg, 
             ${theme === 'light' ? '#f5e6d0' : '#1a1510'} 0%, 
@@ -195,14 +193,14 @@ export default function Court() {
           }} />
 
           <div className="relative p-4 sm:p-6">
-            {/* 御座区 */}
+            {/* Executive */}
             <div className="text-center mb-4">
               <div className="inline-block px-4 py-0.5 rounded-full bg-[#ffd700]/10 border border-[#ffd700]/20 mb-3">
-                <span className="text-[10px] sm:text-xs text-[#ffd700]/70 tracking-wider">👑 御 座</span>
+                <span className="text-[10px] sm:text-xs text-[#ffd700]/70 tracking-wider">🇺🇸 Executive</span>
               </div>
               <div className="flex justify-center gap-2 sm:gap-4">
                 {core.map(bot => (
-                  <PixelPerson key={bot.id} bot={bot} rank="emperor"
+                  <PixelPerson key={bot.id} bot={bot} rank="president"
                     selected={selectedBot === bot.id} online={bot.hasToken}
                     onClick={() => setSelectedBot(selectedBot === bot.id ? null : bot.id)} />
                 ))}
@@ -216,14 +214,14 @@ export default function Court() {
               <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#d4a574]/30 to-transparent" />
             </div>
 
-            {/* 六部 */}
+            {/* Three Branches */}
             <div className="text-center mb-4">
               <div className="inline-block px-4 py-0.5 rounded-full bg-[#d4a574]/5 border border-[#d4a574]/10 mb-3">
-                <span className="text-[10px] sm:text-xs text-[#d4a574]/50 tracking-wider">🏛️ 六 部</span>
+                <span className="text-[10px] sm:text-xs text-[#d4a574]/50 tracking-wider">🏛️ Three Branches</span>
               </div>
               <div className="flex justify-center flex-wrap gap-1.5 sm:gap-3">
-                {liubu.map(bot => (
-                  <PixelPerson key={bot.id} bot={bot} rank="minister"
+                {departments.map(bot => (
+                  <PixelPerson key={bot.id} bot={bot} rank="secretary"
                     selected={selectedBot === bot.id} online={bot.hasToken}
                     onClick={() => setSelectedBot(selectedBot === bot.id ? null : bot.id)} />
                 ))}
@@ -240,11 +238,11 @@ export default function Court() {
             {/* 诸院 */}
             <div className="text-center">
               <div className="inline-block px-4 py-0.5 rounded-full bg-[#d4a574]/5 border border-[#d4a574]/10 mb-3">
-                <span className="text-[10px] sm:text-xs text-[#d4a574]/40 tracking-wider">📚 诸 院</span>
+                <span className="text-[10px] sm:text-xs text-[#d4a574]/40 tracking-wider">📚 Others</span>
               </div>
               <div className="flex justify-center flex-wrap gap-1.5 sm:gap-3">
                 {others.map(bot => (
-                  <PixelPerson key={bot.id} bot={bot} rank="official"
+                  <PixelPerson key={bot.id} bot={bot} rank="staff"
                     selected={selectedBot === bot.id} online={bot.hasToken}
                     onClick={() => setSelectedBot(selectedBot === bot.id ? null : bot.id)} />
                 ))}
@@ -259,7 +257,7 @@ export default function Court() {
         <div className="flex items-center gap-2 mb-3">
           <span>📜</span>
           <h3 className="text-xs sm:text-sm font-medium text-[#d4a574]">
-            {selectedBot ? `下旨 → ${bots.find(b => b.id === selectedBot)?.displayName}` : '颁旨 → 朝堂'}
+            {selectedBot ? `下令 → ${bots.find(b => b.id === selectedBot)?.displayName}` : '下令 → 简报室'}
           </h3>
           {selectedBot && (
             <button onClick={() => setSelectedBot(null)} className={`text-[10px] px-2 py-0.5 rounded border border-[#d4a574]/20 ${sub} hover:text-[#d4a574] cursor-pointer`}>✕</button>
@@ -283,19 +281,19 @@ export default function Court() {
         <div className="flex gap-2">
           <input type="text" value={command} onChange={e => setCommand(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && !sending && sendCommand()}
-            placeholder="输入圣旨..."
+            placeholder="输入指令..."
             className={`flex-1 px-3 py-2.5 text-sm rounded border ${theme === 'light' ? 'bg-gray-50 border-gray-200' : 'bg-[#0d0d1a] border-[#d4a574]/20'} focus:outline-none focus:border-[#d4a574]`} />
           <button onClick={sendCommand} disabled={sending || !command.trim()}
             className="px-4 sm:px-6 py-2.5 bg-gradient-to-r from-[#d4a574] to-[#c49464] text-[#0d0d1a] text-sm font-bold rounded hover:brightness-110 disabled:opacity-40 cursor-pointer transition-all shadow-lg shadow-[#d4a574]/20">
-            {sending ? '⏳' : '📜 下旨'}
+            {sending ? '⏳' : '📜 下令'}
           </button>
         </div>
       </div>
 
-      {/* 朝堂最新消息 */}
+      {/* 简报室最新消息 */}
       <div className={`${bg} rounded-lg p-3 sm:p-4`}>
         <div className="flex items-center justify-between mb-3">
-          <h3 className={`text-[10px] sm:text-xs uppercase tracking-wider ${sub}`}>💬 朝堂最新消息</h3>
+          <h3 className={`text-[10px] sm:text-xs uppercase tracking-wider ${sub}`}>💬 简报室最新消息</h3>
           <button
             onClick={fetchChannelMessages}
             disabled={loadingMessages}
@@ -333,10 +331,10 @@ export default function Court() {
         </div>
       </div>
 
-      {/* 旨意记录 */}
+      {/* 指令记录 */}
       {messages.length > 0 && (
         <div className={`${bg} rounded-lg p-3 sm:p-4`}>
-          <h3 className={`text-[10px] sm:text-xs uppercase tracking-wider mb-2 ${sub}`}>📋 旨意记录</h3>
+          <h3 className={`text-[10px] sm:text-xs uppercase tracking-wider mb-2 ${sub}`}>📋 指令记录</h3>
           <div ref={logRef} className="max-h-48 overflow-y-auto space-y-1.5">
             {messages.map((m, i) => (
               <div key={i} className={`flex items-start gap-2 text-xs ${m.ok ? '' : 'opacity-50'}`}>

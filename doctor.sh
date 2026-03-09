@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================
-# AI 朝廷配置诊断脚本（doctor.sh）
+# MAGA AI Government 配置诊断脚本（doctor.sh）
 # 检查常见配置问题，帮助排查故障
 # ============================================
 
@@ -21,7 +21,7 @@ fail() { echo -e "  ${RED}✗${NC} $1"; ((FAIL++)); }
 info() { echo -e "  ${CYAN}ℹ${NC} $1"; }
 
 echo ""
-echo -e "${BLUE}🏥 AI 朝廷配置诊断${NC}"
+echo -e "${BLUE}🏥 MAGA AI Government 配置诊断${NC}"
 echo "================================"
 echo ""
 

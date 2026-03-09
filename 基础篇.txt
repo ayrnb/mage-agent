@@ -1,8 +1,8 @@
-🏛️ 保姆级教程：30 分钟搭建你的 AI 朝廷
+🇺🇸 保姆级教程：30 分钟搭建你的 MAGA AI Government
 
 适用人群：完全零基础小白
 预计耗时：30-45 分钟
-最终效果：拥有一台永久免费的云服务器，运行你的 AI 朝廷团队
+最终效果：拥有一台永久免费的云服务器，运行你的 MAGA AI Government 团队
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -12,7 +12,7 @@
 2. 连接服务器（5 分钟）
 3. 一键安装 OpenClaw（5 分钟）
 4. 配置 API Key（5 分钟）
-5. 搭建朝廷架构（15 分钟）
+5. 搭建政府架构（15 分钟）
 6. 启动并测试（5 分钟）
 7. 常见问题 Q&A
 8. 15 张配图清单
@@ -246,7 +246,7 @@ npm install -g openclaw --registry=https://registry.npmmirror.com
 
 ━━━━━━━━━━━━━━━━━━━━━━━━
 
-五、搭建朝廷架构（15 分钟）
+五、搭建政府架构（15 分钟）
 
 5.1 自定义核心文件
 
@@ -274,7 +274,7 @@ nano IDENTITY.md
 编辑配置文件：
 nano ~/.openclaw/openclaw.json
 
-一键脚本已生成包含 7 个部门的完整模板。基础篇只用 4 个（司礼监+兵部+户部+礼部），
+一键脚本已生成包含完整三权分立架构的模板。基础篇只用 4 个（幕僚长+参议院+国防部+财政部），
 你可以直接在模板上修改，或者替换成以下精简配置（记得替换 API Key 和 Bot Token）：
 
 {
@@ -311,30 +311,30 @@ nano ~/.openclaw/openclaw.json
     },
     "list": [
       {
-        "id": "main",
-        "name": "司礼监",
+        "id": "chiefofstaff",
+        "name": "白宫幕僚长",
         "model": { "primary": "your-provider/fast-model" },
         "sandbox": { "mode": "off" }
       },
       {
-        "id": "bingbu",
-        "name": "兵部",
-        "model": { "primary": "your-provider/strong-model" },
-        "identity": { "theme": "你是兵部尚书，专精软件工程、系统架构、代码审查。回答用中文，直接给方案。" },
-        "sandbox": { "mode": "all", "scope": "agent" }
-      },
-      {
-        "id": "hubu",
-        "name": "户部",
-        "model": { "primary": "your-provider/strong-model" },
-        "identity": { "theme": "你是户部尚书，专精财务分析、成本管控、电商运营。回答用中文，数据驱动。" },
-        "sandbox": { "mode": "all", "scope": "agent" }
-      },
-      {
-        "id": "libu",
-        "name": "礼部",
+        "id": "senate",
+        "name": "参议院",
         "model": { "primary": "your-provider/fast-model" },
-        "identity": { "theme": "你是礼部尚书，专精品牌营销、社交媒体、内容创作。回答用中文，风格活泼。" },
+        "identity": { "theme": "你是美国参议院，专精战略审议、政策否决、预算审查。回答用中文，严肃权威，必要时可 VETO 总统提案。" },
+        "sandbox": { "mode": "all", "scope": "agent" }
+      },
+      {
+        "id": "defense",
+        "name": "国防部",
+        "model": { "primary": "your-provider/strong-model" },
+        "identity": { "theme": "你是国防部长，专精软件工程、系统架构、代码审查。回答用中文，直接给方案。YES SIR!" },
+        "sandbox": { "mode": "all", "scope": "agent" }
+      },
+      {
+        "id": "treasury",
+        "name": "财政部",
+        "model": { "primary": "your-provider/strong-model" },
+        "identity": { "theme": "你是财政部长，专精财务分析、成本管控、电商运营。回答用中文，数据驱动。" },
         "sandbox": { "mode": "all", "scope": "agent" }
       }
     ]
@@ -345,38 +345,38 @@ nano ~/.openclaw/openclaw.json
       "groupPolicy": "open",
       "allowBots": true,
       "accounts": {
-        "main": {
-          "name": "司礼监",
-          "token": "司礼监的Bot Token",
+        "chiefofstaff": {
+          "name": "白宫幕僚长",
+          "token": "幕僚长的Bot Token",
           "groupPolicy": "open"
         },
-        "bingbu": {
-          "name": "兵部",
-          "token": "兵部的Bot Token",
+        "senate": {
+          "name": "参议院",
+          "token": "参议院的Bot Token",
           "groupPolicy": "open"
         },
-        "hubu": {
-          "name": "户部",
-          "token": "户部的Bot Token",
+        "defense": {
+          "name": "国防部",
+          "token": "国防部的Bot Token",
           "groupPolicy": "open"
         },
-        "libu": {
-          "name": "礼部",
-          "token": "礼部的Bot Token",
+        "treasury": {
+          "name": "财政部",
+          "token": "财政部的Bot Token",
           "groupPolicy": "open"
         }
       }
     }
   },
   "bindings": [
-    { "agentId": "main", "match": { "channel": "discord", "accountId": "main" } },
-    { "agentId": "bingbu", "match": { "channel": "discord", "accountId": "bingbu" } },
-    { "agentId": "hubu", "match": { "channel": "discord", "accountId": "hubu" } },
-    { "agentId": "libu", "match": { "channel": "discord", "accountId": "libu" } }
+    { "agentId": "chiefofstaff", "match": { "channel": "discord", "accountId": "chiefofstaff" } },
+    { "agentId": "senate", "match": { "channel": "discord", "accountId": "senate" } },
+    { "agentId": "defense", "match": { "channel": "discord", "accountId": "defense" } },
+    { "agentId": "treasury", "match": { "channel": "discord", "accountId": "treasury" } }
   ]
 }
 
-💡 想省钱？礼部等轻量任务可以换成 经济模型 模型：
+💡 想省钱？参议院等轻量任务可以换成 经济模型 模型：
    1. 在 models.providers 中添加 your-provider provider：
       "your-provider": {
         "baseUrl": "https://your-provider-api-url",
@@ -384,13 +384,13 @@ nano ~/.openclaw/openclaw.json
         "api": "openai-chat",
         "models": [{ "id": "budget-model", "name": "经济模型", "input": ["text"], "contextWindow": 131072, "maxTokens": 8192 }]
       }
-   2. 把礼部的 model 改为 { "primary": "your-provider/budget-model" }
+   2. 把参议院的 model 改为 { "primary": "your-provider/budget-model" }
    3. 获取地址：https://你的服务商控制台
-   4. 经济模型 比 其他模型便宜 50 倍，适合内容创作、日常对话等轻量任务
+   4. 经济模型 比 其他模型便宜 50 倍，适合审议、日常对话等轻量任务
 
 ⚠️ 重要！替换以下内容（获取方法见下面的详细步骤）：
 - "你的LLM_API_KEY" → 你的 LLM API Key
-- "司礼监的Bot Token" 等 → 每个部门的 Discord Bot Token（下一步创建）
+- "幕僚长的Bot Token" 等 → 每个部门的 Discord Bot Token（下一步创建）
 
 💡 注意 groupPolicy: "open" 这个配置很重要！
 不加的话默认是 "allowlist"，Bot 会静默丢弃所有群聊消息。
@@ -404,14 +404,14 @@ channels 和每个 account 里都要加。
 5.3 创建 Discord Bot（每个部门一个）
 
 💡 多 Bot 架构：每个部门 = 一个独立的 Discord Bot！
-@兵部 就找兵部，@户部 就找户部，各司其职，互不干扰。
-基础篇需要 4 个 Bot：司礼监、兵部、户部、礼部。
+@国防部 就找国防部，@财政部 就找财政部，各司其职，互不干扰。
+基础篇需要 4 个 Bot：幕僚长、参议院、国防部、财政部。
 
 第一步：创建 Application（重复 4 次）
 
 1. 打开 https://discord.com/developers/applications
 2. 点击 "New Application"
-3. 名字填部门名（如"司礼监"、"兵部"、"户部"、"礼部"）
+3. 名字填部门名（如"幕僚长"、"参议院"、"国防部"、"财政部"）
 4. 点击 "Create"
 
 💡 建议一口气创建 4 个 Application，一个部门一个。
@@ -429,10 +429,10 @@ channels 和每个 account 里都要加。
 - Server Members Intent → 可选
 
 💡 建议用记事本先记下每个 Bot 的 Token，格式：
-   司礼监: MTIzNDU2...
-   兵部:   MjM0NTY3...
-   户部:   MzQ1Njc4...
-   礼部:   NDU2Nzg5...
+   幕僚长: MTIzNDU2...
+   参议院: MjM0NTY3...
+   国防部: MzQ1Njc4...
+   财政部: NDU2Nzg5...
 
 第三步：邀请所有 Bot 到你的服务器
 
@@ -449,10 +449,10 @@ channels 和每个 account 里都要加。
 
 💡 bindings 的作用：
 每个 Bot 账号绑定一个 AI Agent。
-@司礼监 → 司礼监 Agent 回复（总管）
-@兵部 → 兵部 Agent 回复（编程专家）
-@户部 → 户部 Agent 回复（财务专家）
-@礼部 → 礼部 Agent 回复（营销专家）
+@幕僚长 → 幕僚长 Agent 回复（总协调）
+@参议院 → 参议院 Agent 回复（政策审议）
+@国防部 → 国防部 Agent 回复（编程专家）
+@财政部 → 财政部 Agent 回复（财务专家）
 
 保存退出：
 - nano：Ctrl+O → 回车保存 → Ctrl+X 退出
@@ -487,23 +487,23 @@ systemctl --user status openclaw-gateway
 
 6.2 测试对话
 
-# 测试司礼监（在任意频道 @司礼监）
-@司礼监 你好，自我介绍一下
+# 测试幕僚长（在任意频道 @幕僚长）
+@幕僚长 你好，自我介绍一下
 
-# 测试兵部（@兵部）
-@兵部 用 Python 写个 Hello World
+# 测试参议院（@参议院）
+@参议院 审议一下这个提案：把所有 API 换成最贵的模型
 
-# 测试户部（@户部）
-@户部 如何控制 AI API 成本
+# 测试国防部（@国防部）
+@国防部 用 Python 写个 Hello World
 
-# 测试礼部（@礼部）
-@礼部 写条小红书文案，主题是 AI 工具推荐
+# 测试财政部（@财政部）
+@财政部 如何控制 AI API 成本
 
 💡 关键：不同 Bot = 不同专家！
 @哪个部门就找哪个专家，在任何频道都行。
 
 📍 成功标志：每个 Bot 的回复风格不一样就对了！✅
-比如兵部会直接给代码，户部会给数据分析。
+比如国防部会直接给代码，财政部会给数据分析，参议院会审议你的提案。
 
 6.3 常用命令
 
@@ -621,10 +621,10 @@ Q8: 如何降低成本？
 
 现在你拥有：
 ✅ 一台永久免费的云服务器（4 核 24GB）
-✅ 一个 AI 朝廷团队（司礼监 + 兵部 + 户部 + 礼部，各自独立 Bot）
+✅ 一个 MAGA AI Government 团队（幕僚长 + 参议院 + 国防部 + 财政部，各自独立 Bot）
 
 下一步：
-1. 根据需求添加更多部门（工部、吏部、刑部）
+1. 根据需求添加更多部门（众议院、国务院、新闻秘书、最高法院）
 2. 配置定时任务（cron）自动汇报
 3. 接入 Notion 自动写日报
 4. 探索更多 OpenClaw 功能

@@ -1,8 +1,8 @@
 /**
- * 🍍 菠萝王朝 Brand Logo
- * Imperial pineapple with crown — SVG component
+ * 🇺🇸 MAGA Government Brand Logo
+ * White House inspired — SVG component
  */
-export function PineappleLogo({ size = 40, className = '' }: { size?: number; className?: string }) {
+export function MAGALogo({ size = 40, className = '' }: { size?: number; className?: string }) {
   return (
     <svg
       width={size}
@@ -28,7 +28,7 @@ export function PineappleLogo({ size = 40, className = '' }: { size?: number; cl
         <circle cx="39" cy="10" r="1.5" fill="#d4a574" />
       </g>
 
-      {/* Pineapple body */}
+      {/* Main body */}
       <ellipse
         cx="32"
         cy="38"
@@ -39,7 +39,7 @@ export function PineappleLogo({ size = 40, className = '' }: { size?: number; cl
         strokeWidth="1.5"
       />
 
-      {/* Cross-hatch pattern on pineapple */}
+      {/* Cross-hatch pattern */}
       <g opacity="0.3" stroke="#0d0d1a" strokeWidth="0.8">
         {/* Diagonal lines */}
         <line x1="22" y1="30" x2="42" y2="46" />
@@ -82,10 +82,10 @@ export function PineappleLogo({ size = 40, className = '' }: { size?: number; cl
 export function LogoFull({ className = '' }: { className?: string }) {
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      <PineappleLogo size={36} />
+      <MAGALogo size={36} />
       <div>
-        <div className="text-lg font-bold text-accent-gradient tracking-wide">菠萝王朝</div>
-        <div className="text-[10px] text-[var(--text-tertiary)] tracking-widest uppercase">Pineapple Dynasty</div>
+        <div className="text-lg font-bold text-accent-gradient tracking-wide">MAGA Gov</div>
+        <div className="text-[10px] text-[var(--text-tertiary)] tracking-widest uppercase">AI Government</div>
       </div>
     </div>
   )

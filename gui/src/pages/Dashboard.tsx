@@ -168,7 +168,7 @@ export default function Dashboard({ data, onNavigate }: Props) {
   useEffect(() => {
     const h = { headers: { Authorization: `Bearer ${AUTH_TOKEN}` } }
     fetch('/api/weather/cities', h).then(r => r.json()).then(d => setWeather(d.cities || [])).catch(() => {})
-    fetch('/api/location/track?role=emperor', h).then(r => r.json()).then(d => setLocations(d.locations || {})).catch(() => {})
+    fetch('/api/location/track?role=president', h).then(r => r.json()).then(d => setLocations(d.locations || {})).catch(() => {})
     fetch('/api/location/all', h).then(r => r.json()).then(d => setLocations(d.locations || {})).catch(() => {})
     fetch('/api/dashboard/summary', h).then(r => r.json()).then(d => setSummary(d)).catch(() => {})
   }, [])
@@ -225,9 +225,9 @@ export default function Dashboard({ data, onNavigate }: Props) {
           <div className="flex flex-wrap gap-4 justify-around">
             {Object.entries(locations).map(([role, loc]) => (
               <div key={role} className="flex items-center gap-2">
-                <span className="text-lg">{role === 'emperor' ? '👑' : '👸'}</span>
+                <span className="text-lg">{role === 'president' ? '🇺🇸' : '⚖️'}</span>
                 <div>
-                  <div className="text-xs sm:text-sm font-medium">{role === 'emperor' ? '皇帝' : '皇后'}</div>
+                  <div className="text-xs sm:text-sm font-medium">{role === 'president' ? '总统' : '副总统'}</div>
                   <div className={`text-[10px] sm:text-xs ${sub}`}>
                     📍 {loc.city || '未知'}{loc.region ? ` · ${loc.region}` : ''}
                   </div>

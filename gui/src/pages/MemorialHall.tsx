@@ -209,7 +209,7 @@ export default function MemorialHall() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className={`text-lg font-medium ${theme === 'light' ? 'text-gray-800' : 'text-[#d4a574]'}`}>
-          📜 奏报厅
+          📜 简报厅
         </h2>
         <button
           onClick={fetchData}

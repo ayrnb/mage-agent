@@ -109,9 +109,9 @@ export default function NotionBoard() {
   }))
 
   const tabs = [
-    { key: 'daily', label: '起居注', icon: '📜' },
-    { key: 'finance', label: '食货表', icon: '💰' },
-    { key: 'personnel', label: '臣工表', icon: '👥' }
+    { key: 'daily', label: 'Daily Report', icon: '📜' },
+    { key: 'finance', label: 'Financial Tracking', icon: '💰' },
+    { key: 'personnel', label: 'Personnel', icon: '👥' }
   ]
 
   // 获取部门列表用于筛选
@@ -125,7 +125,7 @@ export default function NotionBoard() {
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-4">
         <h2 className={`text-lg font-medium ${theme === 'light' ? 'text-gray-800' : 'text-[#d4a574]'}`}>
-          奏章板
+          公告板
         </h2>
         <div className="flex items-center gap-2">
           {/* 筛选器 */}
@@ -171,7 +171,7 @@ export default function NotionBoard() {
         ))}
       </div>
 
-      {/* 起居注 - 日报 */}
+      {/* Daily Report - 日报 */}
       {activeTab === 'daily' && (
         <div className="space-y-4">
           {filteredDaily.map(entry => (
@@ -209,7 +209,7 @@ export default function NotionBoard() {
         </div>
       )}
 
-      {/* 食货表 - 财务 + 图表 */}
+      {/* Financial Tracking - 财务 + 图表 */}
       {activeTab === 'finance' && (
         <div className="space-y-6">
           {/* 图表区域 */}
@@ -314,7 +314,7 @@ export default function NotionBoard() {
         </div>
       )}
 
-      {/* 臣工表 - 人脉 */}
+      {/* Personnel - 人脉 */}
       {activeTab === 'personnel' && (
         <div className={`rounded-lg overflow-hidden ${theme === 'light' ? 'bg-white' : 'bg-[#1a1a2e]'}`}>
           <div className={`grid grid-cols-5 text-xs p-3 border-b ${

@@ -16,13 +16,15 @@ const AUTH_TOKEN = localStorage.getItem('boluo_auth_token') || ''
 const PixelAvatar = ({ status, dept }: { status: string; dept: string }) => {
   const isOnline = status === 'online'
   const colors: Record<string, string> = {
-    'gongbu': '#d4a574', // 工部 - 金色
-    'hubu': '#22c55e',   // 户部 - 绿色
-    'xingbu': '#ef4444', // 刑部 - 红色
-    'bingbu': '#3b82f6', // 兵部 - 蓝色
-    'libu': '#f59e0b',   // 吏部 - 橙色
-    'libu2': '#8b5cf6',  // 礼部 - 紫色
-    'duchayuan': '#14b8a6', // 都察院 - 青色
+    'defense': '#3b82f6',   // 国防部 - 蓝色
+    'treasury': '#22c55e',  // 财政部 - 绿色
+    'state': '#06b6d4',     // 国务院 - 青色
+    'ustr': '#f59e0b',      // 贸易代表 - 橙色
+    'press': '#8b5cf6',     // 新闻秘书 - 紫色
+    'senate': '#ef4444',    // 参议院 - 红色
+    'house': '#ec4899',     // 众议院 - 粉色
+    'scotus': '#a78bfa',    // 最高法院 - 淡紫色
+    'circuit': '#14b8a6',   // 巡回法院 - 青绿色
     'default': '#a3a3a3'
   }
   const color = colors[dept] || colors.default
@@ -158,7 +160,7 @@ export default function Office() {
         
         {/* 标题 */}
         <div className="absolute top-4 left-4">
-          <h3 className="text-[#d4a574] text-sm font-pixel">🏢 菠萝王朝办公室</h3>
+          <h3 className="text-[#d4a574] text-sm font-pixel">🏢 White House Office</h3>
         </div>
 
         {/* 装饰 - 电脑 */}

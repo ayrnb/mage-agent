@@ -19,11 +19,11 @@ const PORT = 18790;
 const AUTH_TOKEN = process.env.BOLUO_AUTH_TOKEN || '';
 
 const AGENT_DEPT_MAP = {
-  'main': '司礼监', 'gongbu': '工部', 'hubu': '户部', 'libu': '吏部',
-  'xingbu': '刑部', 'bingbu': '兵部', 'libu2': '礼部',
-  'neige': '内阁', 'duchayuan': '都察院', 'neiwufu': '内务府',
-  'hanlinyuan': '翰林院', 'taiyiyuan': '太医院', 'guozijian': '国子监',
-  'yushanfang': '御膳房'
+  'main': '白宫幕僚长', 'chiefofstaff': '白宫幕僚长',
+  'senate': '参议院', 'house': '众议院',
+  'defense': '国防部', 'treasury': '财政部', 'state': '国务院',
+  'ustr': '贸易代表', 'press': '新闻秘书',
+  'scotus': '最高法院', 'circuit': '巡回法院'
 };
 
 const HOME = process.env.HOME || '/home/ubuntu';
@@ -215,8 +215,10 @@ app.get('/api/messages', authMiddleware, (req, res) => {
 
 function getTokenStats() {
   const deptMap = {
-    'gongbu': '工部', 'hubu': '户部', 'libu': '吏部', 
-    'xingbu': '刑部', 'bingbu': '兵部', 'libu2': '礼部'
+    'defense': '国防部', 'treasury': '财政部', 'state': '国务院',
+    'ustr': '贸易代表', 'press': '新闻秘书',
+    'senate': '参议院', 'house': '众议院',
+    'scotus': '最高法院', 'circuit': '巡回法院'
   };
 
   const byDepartment = [];
@@ -886,10 +888,10 @@ app.get('/api/notion/data', authMiddleware, (req, res) => {
     }));
     res.json({ type: 'finance', data, lastSync: new Date().toISOString() });
   } else if (type === 'personnel') {
-    const depts = ['工部', '户部', '吏部', '刑部', '兵部', '礼部'];
+    const depts = ['国务院', '财政部', '贸易代表', '最高法院', '国防部', '新闻秘书'];
     const data = depts.map((name, i) => ({
       id: String(i + 1),
-      name: `${name}尚书`,
+      name: `${name}长官`,
       title: name,
       department: name,
       status: 'active',
@@ -1367,7 +1369,7 @@ app.get('/api/channel-messages', authMiddleware, async (req, res) => {
 // 发送指令到Discord频道
 app.post('/api/command', authMiddleware, async (req, res) => {
   const { channel, message, botId } = req.body;
-  const targetChannel = channel || '1474091579630293164'; // 默认朝堂频道
+  const targetChannel = channel || '1474091579630293164'; // 默认简报室频道
   
   // 读取bot token - 使用指定的botId发送
   try {
@@ -1490,7 +1492,7 @@ const ipLocations = {};
 
 app.get('/api/location/track', authMiddleware, async (req, res) => {
   const clientIp = req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.ip;
-  const role = req.query.role || 'unknown'; // 'emperor' or 'queen'
+  const role = req.query.role || 'unknown'; // 'president' or 'vicePresident'
   
   try {
     const r = await fetch(`http://ip-api.com/json/${clientIp}?lang=zh-CN&fields=status,country,regionName,city,lat,lon,query`, { signal: AbortSignal.timeout(5000) });

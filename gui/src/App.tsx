@@ -2,7 +2,7 @@ import { useState } from "react"
 import type { TabName } from "./types"
 import { useStatus } from "./hooks/useStatus"
 import { useTheme } from "./theme"
-import { PineappleLogo } from "./components/Logo"
+import { MAGALogo } from "./components/Logo"
 import Dashboard from "./pages/Dashboard"
 import Departments from "./pages/Departments"
 import TokenStats from "./pages/TokenStats"
@@ -21,14 +21,14 @@ import CronJobs from "./pages/CronJobs"
 
 const tabs: { key: TabName; label: string; icon: string }[] = [
   { key: "dashboard", label: "总览", icon: "📊" },
-  { key: "court", label: "朝堂", icon: "🏯" },
+  { key: "court", label: "简报室", icon: "🏯" },
   { key: "departments", label: "部门", icon: "🏛️" },
   { key: "tokens", label: "Token统计", icon: "🔥" },
   { key: "sessions", label: "会话", icon: "💬" },
   { key: "channels", label: "频道", icon: "📡" },
   { key: "nodes", label: "节点", icon: "🖥️" },
-  { key: "notion", label: "奏章板", icon: "📜" },
-  { key: "memorial", label: "奏报厅", icon: "🏮" },
+  { key: "notion", label: "公告板", icon: "📜" },
+  { key: "memorial", label: "简报厅", icon: "🏮" },
   { key: "logs", label: "日志", icon: "📋" },
   { key: "search", label: "搜索", icon: "🔍" },
   { key: "cron", label: "定时", icon: "⏰" },
@@ -103,11 +103,11 @@ function App() {
         {/* Logo */}
         <div className="p-4 border-b" style={{ borderColor: 'var(--border-accent)' }}>
           <div className="flex items-center gap-2.5">
-            <PineappleLogo size={32} />
+            <MAGALogo size={32} />
             <div>
-              <div className="text-base font-bold text-accent-gradient tracking-wide">菠萝王朝</div>
+              <div className="text-base font-bold text-accent-gradient tracking-wide">MAGA Gov</div>
               <div className="text-[9px] tracking-widest uppercase" style={{ color: 'var(--text-tertiary)' }}>
-                {data?.uptime ? `运行 ${data.uptime}` : 'Pineapple Dynasty'}
+                {data?.uptime ? `运行 ${data.uptime}` : 'AI Government'}
               </div>
             </div>
           </div>
@@ -180,8 +180,8 @@ function App() {
         <header className="md:hidden sticky top-0 z-30 h-12 flex items-center justify-between px-4" style={{ backgroundColor: 'var(--bg-sidebar)', borderBottom: '1px solid var(--border-accent)' }}>
           <button onClick={() => setSidebarOpen(true)} className="text-xl cursor-pointer" style={{ color: 'var(--accent)' }}>☰</button>
           <div className="flex items-center gap-2">
-            <PineappleLogo size={22} />
-            <span className="font-bold text-accent-gradient">菠萝王朝</span>
+            <MAGALogo size={22} />
+            <span className="font-bold text-accent-gradient">MAGA Gov</span>
           </div>
           <button onClick={refresh} className="cursor-pointer" style={{ color: 'var(--text-secondary)' }}>↻</button>
         </header>

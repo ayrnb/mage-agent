@@ -171,7 +171,7 @@ body {
   box-shadow: 0 0 8px var(--accent-glow);
 }
 
-/* Pineapple logo glow on hover */
+/* MAGA logo glow on hover */
 .logo-glow:hover svg {
   filter: drop-shadow(0 0 8px rgba(212, 165, 116, 0.4));
   transition: filter 0.2s ease;
