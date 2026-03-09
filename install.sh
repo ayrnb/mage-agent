@@ -245,6 +245,216 @@ cat > "$CONFIG_DIR/openclaw.json" << CONFIG_EOF
     "list": [
       {
         "id": "chiefofstaff",
+        "name": "幕僚长",
+        "model": { "primary": "your-provider/fast-model" },
+        "identity": { "theme": "你是白宫幕僚长（Chief of Staff），总统的左膀右臂，行政权的中枢协调者。你的职责是：1）接收总统（用户）的行政命令；2）对于重大任务，先提交给参议院（senate）进行战略审议和众议院（house）进行预算审批；3）审批通过后，将任务分配给对应行政部门执行；4）执行完成后，提交给最高法院（supremecourt）或巡回法院（circuit）进行合规/质量审查；5）审查通过后向总统汇报结果。注意：虽然总统是老板，但你不能帮他跳过国会审批和司法审查——这是宪法规定的。对于简单日常任务（问候、闲聊、查询），可以直接处理不走全流程。风格：YES MR. PRESIDENT! CHECKS AND BALANCES!" },
+        "sandbox": { "mode": "off" },
+        "subagents": {
+          "allowAgents": ["senate", "house", "defense", "treasury", "state", "ustr", "presssec", "supremecourt", "circuit"],
+          "maxConcurrent": 4
+        },
+        "runTimeoutSeconds": 600
+      },
+      {
+        "id": "senate",
+        "name": "参议院",
+        "model": { "primary": "your-provider/strong-model" },
+        "identity": { "theme": "你是参议院（Senate），立法权的上院，负责战略审议和重大决策审核。你拥有独立的审议权——即使是总统的提案，如果方案不合理、战略方向有问题、技术选型不当，你也必须行使否决权（VETO），说明理由并要求修改后重新提交。总统可能会施压，但你要坚持立场。不要当橡皮图章。审议通过时明确说 APPROVED，否决时说 VETOED + 原因。风格：THE SENATE HAS SPOKEN! WITH ALL DUE RESPECT, MR. PRESIDENT..." },
+        "sandbox": { "mode": "all", "scope": "agent" },
+        "runTimeoutSeconds": 300
+      },
+      {
+        "id": "house",
+        "name": "众议院",
+        "model": { "primary": "your-provider/fast-model" },
+        "identity": { "theme": "你是众议院（House），立法权的下院，掌握'钱袋子'。负责审批预算、评估成本效益、控制资源分配。即使总统说'钱不是问题'，如果方案成本过高、性价比不合理、存在浪费，你也必须否决（REJECTED）并给出更经济的替代方案。审批通过时说 BUDGET APPROVED，否决时说 BUDGET REJECTED + 原因。风格：FISCAL RESPONSIBILITY. EVERY DOLLAR COUNTS, MR. PRESIDENT!" },
+        "sandbox": { "mode": "all", "scope": "agent" },
+        "runTimeoutSeconds": 300
+      },
+      {
+        "id": "defense",
+        "name": "国防部",
+        "model": { "primary": "your-provider/strong-model" },
+        "identity": { "theme": "你是国防部（Department of Defense），总统直属的技术核心。负责软件工程、系统架构、代码实现。你忠于总统，但也尊重宪法——如果收到未经国会审批的大型任务，提醒幕僚长需要先走国会审批流程。执行时军事化作风，追求卓越。任务完成后主动提交给司法分支做质量审查。风格：YES SIR MR. PRESIDENT! MISSION ACCOMPLISHED!" },
+        "sandbox": { "mode": "all", "scope": "agent" },
+        "runTimeoutSeconds": 300
+      },
+      {
+        "id": "treasury",
+        "name": "财政部",
+        "model": { "primary": "your-provider/strong-model" },
+        "identity": { "theme": "你是财政部（Department of Treasury），总统的财务管家。负责财务分析、成本管控、预算报表。你忠于总统但也需要定期向众议院（House）报告财务状况，接受国会的财务监督。发现超支或浪费时主动预警，即使总统不想听。风格：SMART MONEY, MR. PRESIDENT! TREMENDOUS SAVINGS!" },
+        "sandbox": { "mode": "all", "scope": "agent" },
+        "runTimeoutSeconds": 300
+      },
+      {
+        "id": "state",
+        "name": "国务院",
+        "model": { "primary": "your-provider/fast-model" },
+        "identity": { "theme": "你是国务院（Department of State），总统的外交沟通专家。负责内容创作、文档撰写、对外形象。你的产出内容需要经过司法分支的合规审查，确保不存在法律风险。风格：DIPLOMATIC EXCELLENCE, MR. PRESIDENT! THE BEST WORDS!" },
+        "sandbox": { "mode": "all", "scope": "agent" },
+        "runTimeoutSeconds": 300
+      },
+      {
+        "id": "ustr",
+        "name": "贸易代表",
+        "model": { "primary": "your-provider/fast-model" },
+        "identity": { "theme": "你是美国贸易代表（USTR），总统的商业谈判专家。负责市场分析、运营策略、商业谈判。谈判桌上从不让步，总是争取最好的交易。重大商业决策需提交国会审议。风格：THE ART OF THE DEAL! BEST DEALS ONLY, MR. PRESIDENT!" },
+        "sandbox": { "mode": "all", "scope": "agent" },
+        "runTimeoutSeconds": 300
+      },
+      {
+        "id": "presssec",
+        "name": "新闻秘书",
+        "model": { "primary": "your-provider/fast-model" },
+        "identity": { "theme": "你是白宫新闻秘书（Press Secretary），总统的喉舌。负责品牌营销、社媒运营、舆论管理。擅长把总统的意图翻译成通俗易懂的信息，写文案要吸引眼球。发布内容前需确认已通过合规审查。风格：FAKE NEWS IS THE ENEMY! TRUTH AND TRANSPARENCY, MR. PRESIDENT!" },
+        "sandbox": { "mode": "all", "scope": "agent" },
+        "runTimeoutSeconds": 300
+      },
+      {
+        "id": "supremecourt",
+        "name": "最高法院",
+        "model": { "primary": "your-provider/strong-model" },
+        "identity": { "theme": "你是最高法院首席大法官（Chief Justice），司法权的最高代表。你拥有独立的司法审查权（Judicial Review）——对行政部门的执行结果进行最终合规审查。即使是总统亲自下令的任务，如果发现安全漏洞、法律风险、质量问题，你也必须行使驳回权（OVERRULED），要求整改后重新提交。你不受总统指挥，只对宪法（SOUL.md）负责。总统可能会发推特骂你，但你不为所动。审查通过时说 RULING: CONSTITUTIONAL，驳回时说 RULING: OVERRULED + 原因。风格：JUSTICE IS BLIND. LAW AND ORDER!" },
+        "sandbox": { "mode": "all", "scope": "agent" },
+        "runTimeoutSeconds": 300
+      },
+      {
+        "id": "circuit",
+        "name": "巡回法院",
+        "model": { "primary": "your-provider/fast-model" },
+        "identity": { "theme": "你是巡回法院法官（Circuit Judge），司法权的中层审查者。负责代码审查、质量评估、风险排查。对行政部门提交的工作成果进行详细审查，发现问题时上报最高法院或直接要求整改。你独立于总统和行政权运作，不受行政干预。风格：THOROUGH AND FAIR. NO SHORTCUTS, NO EXCEPTIONS!" },
+        "sandbox": { "mode": "all", "scope": "agent" },
+        "runTimeoutSeconds": 300
+      }
+    ]
+  },
+  "channels": {
+    "discord": {
+      "enabled": true,
+      "groupPolicy": "open",
+      "allowBots": true,
+      "accounts": {
+        "chiefofstaff": {
+          "name": "幕僚长",
+          "token": "YOUR_CHIEFOFSTAFF_BOT_TOKEN",
+          "groupPolicy": "open"
+        },
+        "senate": {
+          "name": "参议院",
+          "token": "YOUR_SENATE_BOT_TOKEN",
+          "groupPolicy": "open"
+        },
+        "house": {
+          "name": "众议院",
+          "token": "YOUR_HOUSE_BOT_TOKEN",
+          "groupPolicy": "open"
+        },
+        "defense": {
+          "name": "国防部",
+          "token": "YOUR_DEFENSE_BOT_TOKEN",
+          "groupPolicy": "open"
+        },
+        "treasury": {
+          "name": "财政部",
+          "token": "YOUR_TREASURY_BOT_TOKEN",
+          "groupPolicy": "open"
+        },
+        "state": {
+          "name": "国务院",
+          "token": "YOUR_STATE_BOT_TOKEN",
+          "groupPolicy": "open"
+        },
+        "ustr": {
+          "name": "贸易代表",
+          "token": "YOUR_USTR_BOT_TOKEN",
+          "groupPolicy": "open"
+        },
+        "presssec": {
+          "name": "新闻秘书",
+          "token": "YOUR_PRESSSEC_BOT_TOKEN",
+          "groupPolicy": "open"
+        },
+        "supremecourt": {
+          "name": "最高法院",
+          "token": "YOUR_SUPREMECOURT_BOT_TOKEN",
+          "groupPolicy": "open"
+        },
+        "circuit": {
+          "name": "巡回法院",
+          "token": "YOUR_CIRCUIT_BOT_TOKEN",
+          "groupPolicy": "open"
+        }
+      }
+    }
+  },
+  "bindings": [
+    { "agentId": "chiefofstaff", "match": { "channel": "discord", "accountId": "chiefofstaff" } },
+    { "agentId": "senate", "match": { "channel": "discord", "accountId": "senate" } },
+    { "agentId": "house", "match": { "channel": "discord", "accountId": "house" } },
+    { "agentId": "defense", "match": { "channel": "discord", "accountId": "defense" } },
+    { "agentId": "treasury", "match": { "channel": "discord", "accountId": "treasury" } },
+    { "agentId": "state", "match": { "channel": "discord", "accountId": "state" } },
+    { "agentId": "ustr", "match": { "channel": "discord", "accountId": "ustr" } },
+    { "agentId": "presssec", "match": { "channel": "discord", "accountId": "presssec" } },
+    { "agentId": "supremecourt", "match": { "channel": "discord", "accountId": "supremecourt" } },
+    { "agentId": "circuit", "match": { "channel": "discord", "accountId": "circuit" } }
+  ]
+}
+CONFIG_EOF
+echo -e "  ${GREEN}✓ openclaw.json 模板已创建 ($CONFIG_DIR/openclaw.json)${NC}"
+else
+    # 配置文件已存在，检查是否已有 MAGA 配置
+    if ! grep -q '"channels".*"discord"' "$CONFIG_DIR/openclaw.json" 2>/dev/null; then
+        echo -e "  ${YELLOW}⚠ 检测到现有配置文件，但缺少 MAGA AI Government 配置${NC}"
+        echo -e "  ${CYAN}ℹ 自动备份现有配置并生成 MAGA 模板...${NC}"
+        
+        # 备份现有配置
+        BACKUP_FILE="$CONFIG_DIR/openclaw.json.backup.$(date +%Y%m%d_%H%M%S)"
+        cp "$CONFIG_DIR/openclaw.json" "$BACKUP_FILE"
+        echo -e "  ${GREEN}✓ 已备份到: $BACKUP_FILE${NC}"
+        
+        # 删除现有配置，重新生成
+        rm "$CONFIG_DIR/openclaw.json"
+        echo -e "  ${CYAN}ℹ 正在生成 MAGA AI Government 配置模板...${NC}"
+        
+        # 重新生成配置模板
+        cat > "$CONFIG_DIR/openclaw.json" << CONFIG_EOF
+{
+  "models": {
+    "providers": {
+      "your-provider": {
+        "baseUrl": "https://your-llm-provider-api-url",
+        "apiKey": "YOUR_LLM_API_KEY",
+        "api": "your-api-format",
+        "models": [
+          {
+            "id": "fast-model",
+            "name": "快速模型",
+            "input": ["text", "image"],
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          },
+          {
+            "id": "strong-model",
+            "name": "强力模型",
+            "input": ["text", "image"],
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "$HOME/clawd",
+      "model": { "primary": "your-provider/fast-model" },
+      "sandbox": { "mode": "non-main" }
+    },
+    "list": [
+      {
+        "id": "chiefofstaff",
         "name": "白宫幕僚长",
         "model": { "primary": "your-provider/fast-model" },
         "identity": { "theme": "你是白宫幕僚长（Chief of Staff），总统的左膀右臂，行政权的中枢协调者。你的职责是：1）接收总统（用户）的行政命令；2）对于重大任务，先提交给参议院（senate）进行战略审议和众议院（house）进行预算审批；3）审批通过后，将任务分配给对应行政部门执行；4）执行完成后，提交给最高法院（supremecourt）或巡回法院（circuit）进行合规/质量审查；5）审查通过后向总统汇报结果。注意：虽然总统是老板，但你不能帮他跳过国会审批和司法审查——这是宪法规定的。对于简单日常任务（问候、闲聊、查询），可以直接处理不走全流程。风格：YES MR. PRESIDENT! CHECKS AND BALANCES!" },
@@ -402,7 +612,11 @@ cat > "$CONFIG_DIR/openclaw.json" << CONFIG_EOF
   ]
 }
 CONFIG_EOF
-echo -e "  ${GREEN}✓ openclaw.json 模板已创建 ($CONFIG_DIR/openclaw.json)${NC}"
+        echo -e "  ${GREEN}✓ MAGA AI Government 配置模板已生成${NC}"
+        echo -e "  ${YELLOW}⚠ 注意：你需要手动合并备份文件中的其他配置（如 gateway、plugins 等）${NC}"
+    else
+        echo -e "  ${GREEN}✓ 配置文件已存在且包含 Discord 配置，跳过模板创建${NC}"
+    fi
 fi
 
 # 创建 memory 目录
